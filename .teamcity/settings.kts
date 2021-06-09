@@ -71,6 +71,14 @@ object Build : BuildType({
                 namesAndTags = "sanjuniko/myfirst-app:%build.number%"
             }
         }
+        step {
+            name = "removing previous container"
+            type = "ssh-exec-runner"
+            param("jetbrains.buildServer.deployer.username", "ubuntu")
+            param("jetbrains.buildServer.sshexec.command", "docker container rm -f my-app || true")
+            param("jetbrains.buildServer.deployer.targetUrl", "172.31.72.160")
+            param("jetbrains.buildServer.sshexec.authMethod", "SSH_AGENT")
+        }
     }
 
     triggers {
