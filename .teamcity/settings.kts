@@ -1,4 +1,5 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.sshAgent
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dockerCommand
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
@@ -73,6 +74,12 @@ object Build : BuildType({
 
     triggers {
         vcs {
+        }
+    }
+
+    features {
+        sshAgent {
+            teamcitySshKey = "sachinsaini.pem"
         }
     }
 })
