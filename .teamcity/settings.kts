@@ -48,6 +48,10 @@ object Build : BuildType({
             name = "test"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
+        maven {
+            name = "package"
+            goals = "package"
+        }
     }
 
     triggers {
