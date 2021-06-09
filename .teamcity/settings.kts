@@ -72,10 +72,13 @@ object Build : BuildType({
             }
         }
         step {
-            name = "removing previous container"
+            name = "Deploy"
             type = "ssh-exec-runner"
             param("jetbrains.buildServer.deployer.username", "ubuntu")
-            param("jetbrains.buildServer.sshexec.command", "docker container rm -f my-app || true")
+            param("jetbrains.buildServer.sshexec.command", """
+                docker container rm -f my-app || true
+                docker run -p 8082:8080 -d --name my-app sanjuniko/myfirst-app:%build.number%
+            """.trimIndent())
             param("jetbrains.buildServer.deployer.targetUrl", "172.31.72.160")
             param("jetbrains.buildServer.sshexec.authMethod", "SSH_AGENT")
         }
