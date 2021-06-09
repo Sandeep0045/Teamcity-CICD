@@ -63,6 +63,12 @@ object Build : BuildType({
                 commandArgs = "--pull"
             }
         }
+        dockerCommand {
+            name = "push image"
+            commandType = push {
+                namesAndTags = "sanjuniko/myfirst-app:%build.number%"
+            }
+        }
     }
 
     triggers {
